@@ -9,3 +9,4 @@ def main(mytimer: func.TimerRequest) -> None:
 
     T = Transformer()
     U = Uploader(T.get_weather(), T.get_day())
+    U.upload_data()
