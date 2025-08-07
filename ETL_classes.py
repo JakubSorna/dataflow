@@ -1,6 +1,9 @@
 import requests as re
 import datetime as dt
 import pyodbc
+import os
+
+
 
 
 class Extractor():
@@ -76,16 +79,7 @@ class Uploader():
     def __init__(self, weather, day):
         self.__weather = weather
         self.__day = day
-        self.__conn = pyodbc.connect(
-            "Driver={ODBC Driver 18 for SQL Server};"
-            "Server=tcp:sql-projekt.database.windows.net,1433;"
-            "Database=weather;"
-            "Uid=server;"
-            "Pwd=Heslo-123;"
-            "Encrypt=yes;"
-            "TrustServerCertificate=yes;"
-            "Connection Timeout=190;"
-        )
+        self.__conn = pyodbc.connect(os.environ["SQL_CONN"])
         self.__cursor = self.__conn.cursor()
 
     def upload_data(self):
@@ -119,5 +113,6 @@ class Uploader():
         self.__conn.close()
             
             
+
 
     
